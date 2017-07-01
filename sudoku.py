@@ -1,10 +1,17 @@
 import sys, traceback
 from tkinter import *
+
 class box:
 
+#constructor function
 	def __init__(self):
+		#List which keeps changing during the backtracking process
 		self.persList = [1,2,3,4,5,6,7,8,9]
+
+		#List that remain fixed during the program execution
 		self.fixList = [1,2,3,4,5,6,7,8,9]
+		
+		#value inside each box of the sudoku
 		self.value=0
 		self.fixed=False
 
@@ -30,8 +37,7 @@ def solve():
 					sudoku[i][j].fixList=[sudoku[i][j].value]
 				elif(isPresentRow(i,k,j)==True or isPresentCol(j,k,i)==True or isPresentBox(i,j,k)):
 					sudoku[i][j].fixList.remove(k)
-				
-			
+					
 			sudoku[i][j].persList= list(sudoku[i][j].fixList);
 
 
@@ -182,17 +188,25 @@ def solve():
 			
 		i=i+1
 
+
+
+
 	
 	for i in range(9):
 		for	j in range(9):
+
+			if(j>2 and j<6):
+				clr = 'green'
+			else:
+				clr = 'red'
+
+			if(i>2 and i<6):
+				clr = 'green'
+
 			v = StringVar(master, value=sudoku[i][j].value)
-			Entry(master,width=4,textvariable=v).grid(row=i+1, column=j+1)
+			Entry(master,width=4,textvariable=v,bg=clr).grid(row=i+1, column=j+1)
+
 	#printing()
-
-
-
-
-
 
 
 
@@ -262,8 +276,17 @@ for i in range(1,10):
 
 for i in range(1,10):
 	for j in range(1,10):
+		if(j>3 and j<7):
+			clr = 'green'
+		else:
+			clr = 'red'
+
+		if(i>3 and i<7):
+			clr = 'green'
+
+
 		v = None
-		sudoku[i-1][j-1].value = Entry(master, width=4,textvariable=v)
+		sudoku[i-1][j-1].value = Entry(master, width=4,textvariable=v,bg=clr)
 		sudoku[i-1][j-1].value.grid(row=i, column=j)
 		
 
